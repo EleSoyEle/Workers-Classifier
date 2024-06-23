@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #282c34;
 }
 
 .App-logo {
@@ -11,6 +12,18 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.container_quests {
+  background-color: #282c34;
+}
+
+.quest-text{
+  text-align: left;
+}
+
+.button_data{
+  margin-top: 1%;
 }
 
 .App-header {
