@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 
 function App() {
   const [index, setIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [selectedAnswers, setSelectedAnswers] = useState(Array(questionsList.length).fill("Ninguno"));
   const [response, setResponse] = useState(null);
   const [socket, setSocket] = useState(null);
 
@@ -71,8 +71,8 @@ function App() {
       {index === 1 && (
         <section>
           <div className="App-header">
-            <h3>Rellene los datos del formulario</h3>
-            <div className="row">
+            <h3><b>Rellene los datos del formulario</b></h3>
+            <div className="row w-75">
               {questionsList.map((questMod, value) => (
                 <section key={value} className="col-xxl-4 d-flex align-items-stretch">
                   <div className="colcontainer flex-grow-1 d-flex flex-column">
@@ -85,8 +85,9 @@ function App() {
                     >
                       <option value="Ninguno">Ninguno</option>
                       {questMod.answers.map((questionq, number) => (
-                        <option key={number} value={number}>{questionq}</option>
+                        <option key={number} value={questionq}>{questionq}</option>
                       ))}
+                      <br /><br /><br />
                     </select>
                   </div>
                 </section>
@@ -94,22 +95,27 @@ function App() {
             </div>
             <br />
             <button className="btn btn-primary button_data" onClick={handleClick}>Enviar datos</button>
+            <br />
           </div>
         </section>
       )}
       {index === 2 && (
         <div className="App-header">
-          {selectedAnswers.length === 4 ? (
+          {selectedAnswers.length === questionsList.length && selectedAnswers.every(answer => answer !== "Ninguno") ? (
             <section>
+              {console.log(selectedAnswers)}
               <p>Datos enviados correctamente. ¡Gracias!</p>
-              {response !== null && <p>Prediccion del modelo: {response}</p>}  
+              {response !== null && (
+                <section>
+                <p>La probabilidad de durar mas de 3 años es: {response*100}% </p>
+                </section>
+              )}  
             </section>
           ) : (
             <p>Rellena todos los campos</p>
           )}
           
           <button className="btn btn-primary" onClick={() => window.location.reload()}>Volver al inicio</button>
-
         </div>
       )}
     </div>
