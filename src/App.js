@@ -10,7 +10,10 @@ function App() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('34.68.200.187:5000');
+    const newSocket = io('34.68.200.187:5000',{
+      secure:true,
+      rejectUnauthorized:false
+    });
 
     newSocket.on("connect", () => {
       console.log("Cliente conectado");
