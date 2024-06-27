@@ -10,7 +10,7 @@ function App() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('http://35.202.201.214:5000',{
+    const newSocket = io('https://35.202.201.214:5000',{
       secure:true,
       rejectUnauthorized:false
     });
