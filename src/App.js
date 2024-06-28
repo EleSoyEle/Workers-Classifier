@@ -10,7 +10,7 @@ function App() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('130.211.206.151:5000',{
+    const newSocket = io('104.197.68.136:5000',{
       secure:true,
       rejectUnauthorized:false
     });
