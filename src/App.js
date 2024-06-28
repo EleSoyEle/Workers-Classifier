@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const newSocket = io('104.197.68.136:5000',{
       withCredentials:true,
-      extraHeaders{
+      extraHeaders:{
       'Access-Control-Allow-Origin':'https://workers-classifier.vercel.app',
       }
     });
