@@ -11,8 +11,10 @@ function App() {
 
   useEffect(() => {
     const newSocket = io('104.197.68.136:5000',{
-      secure:true,
-      rejectUnauthorized:false
+      withCredentials:true,
+      extraHeaders{
+      'Access-Control-Allow-Origin':'https://workers-classifier.vercel.app',
+      }
     });
 
     newSocket.on("connect", () => {
