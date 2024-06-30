@@ -10,6 +10,7 @@ function App() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
+    //Ip del servidor
     const newSocket = io('https://862e-187-189-15-33.ngrok-free.app');
 
     newSocket.on("connect", () => {
