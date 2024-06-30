@@ -1,4 +1,3 @@
-import socketio
 import eventlet
 import eventlet.wsgi
 from flask import Flask, jsonify
@@ -6,33 +5,32 @@ from flask_cors import CORS
 import numpy as np
 import tensorflow as tf
 import os
+import socketio
 from models import *
+
+# Crear una instancia de Flask y configurar CORS
+app = Flask(__name__)
+CORS(app)  # Habilitar CORS para todas las rutas de Flask
+
+# Configurar Socket.IO
+sio = socketio.Server(cors_allowed_origins="*")
+app.wsgi_app = socketio.WSGIApp(sio, app.wsgi_app)
+
+# Cargar modelos de Machine Learning
 neural_n = make_model()
+clf_en, clf_gini, knn2, LR = load_models()
 
-clf_en,clf_gini,knn2,LR = load_models()
-
-path_ckpt = os.path.join("/home/angelo/test/src/python_modules/nn_checkpoints/")
-ckpt = tf.train.Checkpoint(
-    model=neural_n,
-)
+path_ckpt = "/home/angelo/test/src/python_modules/nn_checkpoints/"
+ckpt = tf.train.Checkpoint(model=neural_n)
 latest_ckpt = tf.train.latest_checkpoint(path_ckpt)
 
 if latest_ckpt:
     # Restaurar el último punto de control
     status = ckpt.restore(latest_ckpt)
-
     # Verificar si la restauración fue exitosa
     status.assert_existing_objects_matched()
     #status.expect_partial()  # si esperas que algunos objetos no se restauren
-
-    # Puedes imprimir un mensaje para confirmar
     print("Pesos cargados correctamente")
-
-# Crear una instancia de Flask y SocketIO
-app = Flask(__name__)
-CORS(app)  # Habilitar CORS para todas las rutas
-sio = socketio.Server(cors_allowed_origins="*")
-app.wsgi_app = socketio.WSGIApp(sio, app.wsgi_app)
 
 # Ruta de prueba para asegurar que Flask está corriendo
 @app.route('/')
@@ -56,15 +54,15 @@ def message(sid, data):
     clf_ginipred = clf_gini.predict(cdata)
     clf_enpred = clf_en.predict(cdata)
     nn_pred = np.array(neural_n(np.array(cdata))).round()
-    preds = np.mean([LRpred,knn2pred,clf_ginipred,clf_enpred,nn_pred[0]])
-    print("Prediccion {},{},{},{},{}".format(LRpred,knn2pred,clf_ginipred,clf_enpred,nn_pred))
-    sio.emit('response',float(preds),room=sid)
+    preds = np.mean([LRpred, knn2pred, clf_ginipred, clf_enpred, nn_pred[0]])
+    print("Prediccion {},{},{},{},{}".format(LRpred, knn2pred, clf_ginipred, clf_enpred, nn_pred))
+    sio.emit('response', float(preds), room=sid)
 
 # Manejar la desconexión del cliente
 @sio.event
 def disconnect(sid):
     print(f"Client disconnected: {sid}")
 
-# Ejecutar el servidor
+# Ejecutar el servidor usando eventlet (compatible con Socket.IO)
 if __name__ == '__main__':
-    eventlet.wsgi.server(eventlet.listen(('192.168.100.10', 5000)), app)
+    eventlet.wsgi.server(eventlet.listen(('0.0.0.0', 5000)), app)

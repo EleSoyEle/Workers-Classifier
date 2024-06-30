@@ -10,12 +10,7 @@ function App() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('104.197.68.136:5000',{
-      withCredentials:true,
-      extraHeaders:{
-      'Access-Control-Allow-Origin':'https://workers-classifier.vercel.app',
-      }
-    });
+    const newSocket = io('https://862e-187-189-15-33.ngrok-free.app');
 
     newSocket.on("connect", () => {
       console.log("Cliente conectado");
@@ -75,34 +70,32 @@ function App() {
 
       {index === 1 && (
         <section>
-          <div className="App-header">
-            <h3><b>Rellene los datos del formulario</b></h3>
-            <div className="row w-75">
-              {questionsList.map((questMod, value) => (
-                <section key={value} className="col-xxl-4 d-flex align-items-stretch">
-                  <div className="colcontainer flex-grow-1 d-flex flex-column">
-                    <h4 className="quest-text">{questMod.question}</h4>
-                    <select
-                      className="form-select mt-auto form-control-sm"
-                      aria-label="Multiple select example"
-                      defaultValue="Ninguno"
-                      onChange={(e) => handleSelectChange(e.target.value, value)}
-                    >
-                      <option value="Ninguno">Ninguno</option>
-                      {questMod.answers.map((questionq, number) => (
-                        <option key={number} value={questionq}>{questionq}</option>
-                      ))}
-                      <br /><br /><br />
-                    </select>
-                  </div>
-                </section>
-              ))}
-            </div>
-            <br />
-            <button className="btn btn-primary button_data" onClick={handleClick}>Enviar datos</button>
-            <br />
+        <div className="App-header">
+          <h3><b>Rellene los datos del formulario</b></h3>
+          
+          <div className="row w-75">
+            {questionsList.map((questMod, value) => (
+              <section key={value} className="col-xxl-4 d-flex align-items-stretch mb-3">
+                <div className="colcontainer flex-grow-1 d-flex flex-column">
+                  <p className='quest-text mb-2'>{questMod.question}</p>
+                  <select
+                    className="form-select form-select-sm mt-auto"
+                    aria-label="Multiple select example"
+                    defaultValue="Ninguno"
+                    onChange={(e) => handleSelectChange(e.target.value, value)}>
+                    <option value="Ninguno">Ninguno</option>
+                    {questMod.answers.map((questionq, number) => (
+                      <option key={number} value={questionq}>{questionq}</option>
+                    ))}
+                  </select>
+                </div>
+              </section>
+            ))}
           </div>
-        </section>
+          <button className="btn btn-primary button_data mt-3" onClick={handleClick}>Enviar datos</button>
+          <br />
+        </div>
+      </section>      
       )}
       {index === 2 && (
         <div className="App-header">
