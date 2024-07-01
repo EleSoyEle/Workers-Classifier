@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     //Ip del servidor
-    const newSocket = io('https://862e-187-189-15-33.ngrok-free.app');
+    const newSocket = io('https://77d2-187-189-15-33.ngrok-free.app');
 
     newSocket.on("connect", () => {
       console.log("Cliente conectado");
