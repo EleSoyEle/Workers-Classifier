@@ -7,6 +7,7 @@ import tensorflow as tf
 import os
 import socketio
 from models import *
+import pandas as pd
 
 # Crear una instancia de Flask y configurar CORS
 app = Flask(__name__)
@@ -41,7 +42,7 @@ def index():
 @sio.event
 def connect(sid, environ):
     print(f"Client connected: {sid}")
-    sio.emit('message', {'data': 'Welcome!'}, room=sid)
+    #sio.emit('message', {'data': 'Welcome!'}, room=sid)
 
 # Manejar mensajes enviados desde el cliente
 @sio.event
@@ -53,7 +54,7 @@ def message(sid, data):
     knn2pred = knn2.predict(cdata)
     clf_ginipred = clf_gini.predict(cdata)
     clf_enpred = clf_en.predict(cdata)
-    nn_pred = np.array(neural_n(np.array(cdata))).round()
+    nn_pred = np.array(neural_n(np.array(cdata)))
     preds = np.mean([LRpred, knn2pred, clf_ginipred, clf_enpred, nn_pred[0]])
     print("Prediccion {},{},{},{},{}".format(LRpred, knn2pred, clf_ginipred, clf_enpred, nn_pred))
     sio.emit('response', float(preds), room=sid)

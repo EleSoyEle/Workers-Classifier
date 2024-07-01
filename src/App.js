@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     //Ip del servidor
-    const newSocket = io('https://77d2-187-189-15-33.ngrok-free.app');
+    const newSocket = io('https://cf8c-187-189-15-33.ngrok-free.app');
 
     newSocket.on("connect", () => {
       console.log("Cliente conectado");
@@ -21,9 +21,9 @@ function App() {
       console.log("Mensaje recibido,", data);
     });
 
-    newSocket.on("response", (data) => {
+    newSocket.on("response", (data) => { 
       console.log("Respuesta del servidor:", data);
-      setResponse(data); // Actualiza el estado response con el número aleatorio
+      setResponse(data); // Actualiza el response con la prediccion(data)
     });
 
     newSocket.on("disconnect", () => {
@@ -39,8 +39,7 @@ function App() {
 
   const handleClick = () => {
     if (index === 1) {
-      // Aquí puedes realizar alguna validación o procesamiento de los datos del formulario antes de enviarlos al servidor
-      const formData = selectedAnswers; // Ejemplo: enviando las respuestas seleccionadas
+      const formData = selectedAnswers;
       socket.emit("message", formData);
       setIndex(2); // Cambia el estado index después de enviar los datos
     } else {
