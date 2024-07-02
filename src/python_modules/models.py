@@ -4,11 +4,7 @@ from tensorflow.keras.models import Sequential
 import numpy as np
 import os
 from cara import cara
-import sklearn
 import xgboost
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.linear_model import LogisticRegression
 import pickle
 import os
 
