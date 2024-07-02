@@ -46,8 +46,10 @@ def message(sid, data):
     print(f"Message from {sid}: {data}")
     cdata = get_values(data)
     nn_pred = np.array(neural_n(np.array(cdata)))[0] 
-    xgb_pred = xgb.predict(xgboost.DMatrix(data=cdata))
-    sio.emit('response',[float(nn_pred),int(xgb_pred)], room=sid)
+    xgb_pred = xgb.predict(cdata)
+    preds = [float(nn_pred),int(xgb_pred)]
+    print("Prediccion: {}".format(preds))
+    sio.emit('response',preds, room=sid)
 
 # Manejar la desconexión del cliente
 @sio.event
