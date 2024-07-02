@@ -7,7 +7,7 @@ import tensorflow as tf
 import os
 import socketio
 from models import *
-
+import xgboost
 # Crear una instancia de Flask y configurar CORS
 app = Flask(__name__)
 CORS(app)  # Habilitar CORS para todas las rutas de Flask
@@ -48,8 +48,8 @@ def message(sid, data):
     print(f"Message from {sid}: {data}")
     cdata = get_values(data)
     nn_pred = np.array(neural_n(np.array(cdata)))[0]
-    xgb_pred = xgb.predict(cdata)
-    sio.emit('response',[float(nn_pred),xgb_pred], room=sid)
+    xgb_pred = xgb.predict(xgboost.DMatrix(data=cdata))
+    sio.emit('response',[float(nn_pred),int(xgb_pred)], room=sid)
 
 # Manejar la desconexión del cliente
 @sio.event

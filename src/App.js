@@ -105,7 +105,9 @@ function App() {
               <p>Datos enviados correctamente. ¡Gracias!</p>
               {response !== null && (
                 <section>
-                <p>La probabilidad de durar mas de 3 años es: {response*100}% </p>
+                <p>Segun cada modelo, la probabilidad de durar 3 años es:</p>
+                <p>Neural network: {response[0]*100}%</p>
+                <p>Xgboost: {response*[1]*100}%</p>
                 </section>
               )}  
             </section>
