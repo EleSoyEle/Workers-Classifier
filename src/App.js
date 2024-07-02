@@ -62,7 +62,8 @@ function App() {
       {index === 0 && (
         <section>
           <div className="App-header">
-            <h1>Rellena la información del nuevo empleado</h1>
+            <h1>Evaluador de duración de trabajadores</h1>
+            <p>Agrega los datos del trabajador</p>
             <button className="btn btn-primary" onClick={handleClick}>Empezar</button>
           </div>
         </section>
@@ -93,7 +94,7 @@ function App() {
             ))}
           </div>
           <button className="btn btn-primary button_data mt-3" onClick={handleClick}>Enviar datos</button>
-          <br />
+          
         </div>
       </section>      
       )}
