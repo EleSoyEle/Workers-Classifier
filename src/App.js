@@ -108,7 +108,7 @@ function App() {
                 <section>
                 <p>Segun cada modelo, la probabilidad de durar 3 años es:</p>
                 <p>Neural network: {response[0]*100}%</p>
-                <p>Xgboost: {response*[1]*100}%</p>
+                <p>Xgboost: {response[1]*100}%</p>
                 </section>
               )}  
             </section>
