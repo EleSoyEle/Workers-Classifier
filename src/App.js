@@ -9,7 +9,7 @@ function make_header(){
     <section>
       <nav class="navbar navbar-dark bg-dark">
         <div class="container">
-          <span class="navbar-brand mb-0 h1">Workdev</span>
+          <span class="navbar-brand mb-0 h1" onClick={() => window.location.reload()}>Workdev</span>
         </div>
     </nav>
     </section>
