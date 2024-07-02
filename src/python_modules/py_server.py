@@ -7,7 +7,6 @@ import tensorflow as tf
 import os
 import socketio
 from models import *
-import pandas as pd
 
 # Crear una instancia de Flask y configurar CORS
 app = Flask(__name__)
@@ -19,8 +18,7 @@ app.wsgi_app = socketio.WSGIApp(sio, app.wsgi_app)
 
 # Cargar modelos de Machine Learning
 neural_n = make_model()
-clf_en, clf_gini, knn2, LR = load_models()
-
+xgb = load_xgb()
 path_ckpt = "/home/angelo/test/src/python_modules/nn_checkpoints/"
 ckpt = tf.train.Checkpoint(model=neural_n)
 latest_ckpt = tf.train.latest_checkpoint(path_ckpt)
@@ -49,15 +47,9 @@ def connect(sid, environ):
 def message(sid, data):
     print(f"Message from {sid}: {data}")
     cdata = get_values(data)
-
-    LRpred = LR.predict(cdata)
-    knn2pred = knn2.predict(cdata)
-    clf_ginipred = clf_gini.predict(cdata)
-    clf_enpred = clf_en.predict(cdata)
-    nn_pred = np.array(neural_n(np.array(cdata)))
-    preds = np.mean([LRpred, knn2pred, clf_ginipred, clf_enpred, nn_pred[0]])
-    print("Prediccion {},{},{},{},{}".format(LRpred, knn2pred, clf_ginipred, clf_enpred, nn_pred))
-    sio.emit('response', float(preds), room=sid)
+    nn_pred = np.array(neural_n(np.array(cdata)))[0]
+    xgb_pred = xgb.predict(cdata)
+    sio.emit('response',[float(nn_pred),xgb_pred], room=sid)
 
 # Manejar la desconexión del cliente
 @sio.event

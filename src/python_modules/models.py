@@ -32,6 +32,9 @@ def load_models():
 def load_xgb():
     path_check = "~/test/src/python_modules/m_checkpoints/xgb.model"
 
+    xgb = xgboost.Booster()
+    xgb.load_model(path_check)
+    return xgb
 
 def make_model():
     neural_n = Sequential()
