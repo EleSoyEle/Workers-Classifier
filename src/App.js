@@ -4,6 +4,20 @@ import { questionsList } from './data.js';
 import io from 'socket.io-client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+function make_header(){
+  return (
+    <section>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+          <span class="navbar-brand mb-0 h1">Workdev</span>
+        </div>
+    </nav>
+    </section>
+  );
+
+}
+
+
 function App() {
   const [index, setIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState(Array(questionsList.length).fill("Ninguno"));
@@ -62,6 +76,7 @@ function App() {
     <div className="App">
       {index === 0 && (
         <section>
+          {make_header()}
           <div className="App-header">
             <h1 className='display-6'><b>¿Cuanto va a durar un trabajador?</b></h1>
           
@@ -77,6 +92,7 @@ function App() {
 
       {index === 1 && (
         <section>
+        {make_header()}
         <div className="App-header">
         <h3 className='display-6'>Ingresa los datos del trabajador</h3>
           
@@ -105,26 +121,29 @@ function App() {
       </section>      
       )}
       {index === 2 && (
-        <div className="App-header">
-          {selectedAnswers.length === questionsList.length && selectedAnswers.every(answer => answer !== "Ninguno") ? (
-            <section>
-              {console.log(selectedAnswers)}
-              <h3 className='display-6'>Resultados</h3>
-              <hr></hr>
-              {response !== null && (
-                <section>
-                <p className='lead quest-text'>Resultados de cada modelo:</p>
-                <p className='lead quest-text'>Neural network: {response[0].toFixed(2)*100}%</p>
-                <p className='lead quest-text'>Xgboost: {response[1]*100}%</p>
-                </section>
-              )}  
-            </section>
-          ) : (
-            <p className='lead'>Rellena todos los campos</p>
-          )}
-          
-          <button className="btn btn-primary" onClick={() => window.location.reload()}>Volver al inicio</button>
-        </div>
+        <section>
+          {make_header()}
+          <div className="App-header">
+            {selectedAnswers.length === questionsList.length && selectedAnswers.every(answer => answer !== "Ninguno") ? (
+              <section>
+                {console.log(selectedAnswers)}
+                <h3 className='display-6'>Resultados</h3>
+                <hr></hr>
+                {response !== null && (
+                  <section>
+                  <p className='lead quest-text'>Resultados de cada modelo:</p>
+                  <p className='lead quest-text'>Neural network: {response[0].toFixed(2)*100}%</p>
+                  <p className='lead quest-text'>Xgboost: {response[1]*100}%</p>
+                  </section>
+                )}  
+              </section>
+            ) : (
+              <p className='lead'>Rellena todos los campos</p>
+            )}
+            
+            <button className="btn btn-primary" onClick={() => window.location.reload()}>Volver al inicio</button>
+          </div>
+        </section>
       )}
     </div>
   );
