@@ -38,7 +38,7 @@ function App() {
 
     newSocket.on("response", (data) => { 
       console.log("Respuesta del servidor:", data);
-      setResponse(data); // Actualiza el response con la prediccion(data)
+      setResponse(data);
     });
 
     newSocket.on("disconnect", () => {

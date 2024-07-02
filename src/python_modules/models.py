@@ -7,7 +7,6 @@ from cara import cara
 import xgboost
 import pickle
 import os
-from sklearn.preprocessing import LabelEncoder
 
 
 nominal_columns = ['Dep. Name', 'Dep. Class', 'Position Name', 'Position ID',
@@ -15,14 +14,6 @@ nominal_columns = ['Dep. Name', 'Dep. Class', 'Position Name', 'Position ID',
                    'Gender', 'Plant', 'Type', 'Category', 'Function',
                    'Area', 'Business Unit', 'Manager', 'GM', 'Director',
                    'VP', 'BP']
-
-nominal_columns_xg = ['Dep. Name_Encoded', 'Dep. Class_Encoded', 'Position Name_Encoded',
-       'Position ID_Encoded', 'Employee Type_Encoded',
-       'Nacionality_Encoded', 'Status_Encoded', 'Turn Code_Encoded',
-       'Gender_Encoded', 'Plant_Encoded', 'Type_Encoded',
-       'Category_Encoded', 'Function_Encoded', 'Area_Encoded',
-       'Business Unit_Encoded', 'Manager_Encoded', 'GM_Encoded',
-       'Director_Encoded', 'VP_Encoded', 'BP_Encoded']
 def load_models():
     path_check = os.path.join("/home/angelo/test/src/python_modules/m_checkpoints/")
     ckname = ['knn2.pkl', 'clf_gini.pkl', 'LR.pkl', 'clf_en.pkl']
