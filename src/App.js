@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { questionsList } from './data.js';
 import io from 'socket.io-client';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [index, setIndex] = useState(0);
@@ -62,9 +63,14 @@ function App() {
       {index === 0 && (
         <section>
           <div className="App-header">
-            <h1>Evaluador de duración de trabajadores</h1>
-            <p>Agrega los datos del trabajador</p>
-            <button className="btn btn-primary" onClick={handleClick}>Empezar</button>
+            <h1 className='display-6'><b>¿Cuanto va a durar un trabajador?</b></h1>
+          
+            <div className='container'>
+              <p class="lead"><small>Bienvenido a nuestra herramienta de predicción de retención de empleados.Con nuestra aplicación, puedes anticipar si un trabajador permanecerá en tu empresa por más de tres años. Utilizamos modelos avanzados de aprendizaje automático para analizar datos clave y proporcionar predicciones precisas.</small></p>
+              <hr></hr>
+              <p>Ingresa la informacion para ver los resultados de nuestros modelos</p>
+              <button className="btn btn-primary" onClick={handleClick}>Empezar</button>
+            </div>
           </div>
         </section>
       )}
@@ -107,7 +113,7 @@ function App() {
               {response !== null && (
                 <section>
                 <p>Segun cada modelo, la probabilidad de durar 3 años es:</p>
-                <p>Neural network: {response[0]*100}%</p>
+                <p>Neural network: {response[0].toFixed(2)*100}%</p>
                 <p>Xgboost: {response[1]*100}%</p>
                 </section>
               )}  
