@@ -15,7 +15,7 @@
 }
 
 .container_quests {
-  background-color: #282c34;
+  background-color: #28342c;
 }
 
 .quest-text{
@@ -27,7 +27,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #1e2127;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

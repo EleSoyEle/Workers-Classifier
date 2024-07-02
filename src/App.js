@@ -78,13 +78,13 @@ function App() {
       {index === 1 && (
         <section>
         <div className="App-header">
-          <h3><b>Rellene los datos del formulario</b></h3>
+        <h3 className='display-6'>Ingresa los datos del trabajador</h3>
           
           <div className="row w-75">
             {questionsList.map((questMod, value) => (
               <section key={value} className="col-xxl-4 d-flex align-items-stretch mb-3">
                 <div className="colcontainer flex-grow-1 d-flex flex-column">
-                  <p className='quest-text mb-2'>{questMod.question}</p>
+                  <p className='lead quest-text mb-2'>{questMod.question}</p>
                   <select
                     className="form-select form-select-sm mt-auto"
                     aria-label="Multiple select example"
@@ -100,7 +100,7 @@ function App() {
             ))}
           </div>
           <button className="btn btn-primary button_data mt-3" onClick={handleClick}>Enviar datos</button>
-          
+          <p className='lead'>Asegúrese de ingresar la información correcta para obtener los mejores resultados.</p>
         </div>
       </section>      
       )}
@@ -109,17 +109,18 @@ function App() {
           {selectedAnswers.length === questionsList.length && selectedAnswers.every(answer => answer !== "Ninguno") ? (
             <section>
               {console.log(selectedAnswers)}
-              <p>Datos enviados correctamente. ¡Gracias!</p>
+              <h3 className='display-6'>Resultados</h3>
+              <hr></hr>
               {response !== null && (
                 <section>
-                <p>Segun cada modelo, la probabilidad de durar 3 años es:</p>
-                <p>Neural network: {response[0].toFixed(2)*100}%</p>
-                <p>Xgboost: {response[1]*100}%</p>
+                <p className='lead quest-text'>Resultados de cada modelo:</p>
+                <p className='lead quest-text'>Neural network: {response[0].toFixed(2)*100}%</p>
+                <p className='lead quest-text'>Xgboost: {response[1]*100}%</p>
                 </section>
               )}  
             </section>
           ) : (
-            <p>Rellena todos los campos</p>
+            <p className='lead'>Rellena todos los campos</p>
           )}
           
           <button className="btn btn-primary" onClick={() => window.location.reload()}>Volver al inicio</button>
