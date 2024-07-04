@@ -48,7 +48,7 @@ def message(sid, data):
     cdata = get_values(data)
     nn_pred = np.array(neural_n(np.array(cdata)))[0]
     df = pd.DataFrame(cdata,columns=feature_names)
-    xgb_pred = 0 if xgb.predict_proba(df)[:,1]<0.82 else 1
+    xgb_pred = xgb.predict(df)
     preds = [float(nn_pred),float(xgb_pred)]
     print("Prediccion: {}".format(preds))
     sio.emit('response',preds, room=sid)

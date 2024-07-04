@@ -33,11 +33,11 @@ function App() {
     });
 
     newSocket.on("message", (data) => {
-      console.log("Mensaje recibido,", data);
+      //console.log("Mensaje recibido,", data);
     });
 
     newSocket.on("response", (data) => { 
-      console.log("Respuesta del servidor:", data);
+      //console.log("Respuesta del servidor:", data);
       setResponse(data);
     });
 
@@ -126,27 +126,28 @@ function App() {
           <div className="App-header">
             {selectedAnswers.length === questionsList.length && selectedAnswers.every(answer => answer !== "Ninguno") ? (
               <section>
-                {console.log(selectedAnswers)}
-                <h3 className='display-6'>Resultados</h3>
-                <hr></hr>
-                {response !== null && (
-                  <section>
-                  <p className='lead quest-text'>Resultados de cada modelo:</p>
-                  <p className='lead quest-text'>Neural network: {response[0].toFixed(2)*100}%</p>
-                  <p className='lead quest-text'>Xgboost: {response[1].toFixed(2)*100}%</p>
+                <div className="container">
+                  <h3 className='display-6'>Resultados</h3>
                   <hr></hr>
-                  <p className='lead quest-text'>Promedio:{(response[0]*100/2+response[1]*100/2).toFixed(1)}%</p>
-                  {Math.floor(response[0]*100/2+response[1]*100/2)>50 ? (
-                      <p className='lead quest-text'>Es probable que dure mas de 3 años</p>
-                  ) : Math.floor(response[0]*100/2+response[1]*100/2)===50 ? (
-                      <p className='lead quest-text'>No podemos saber si va a durar mas de 3 años</p>
-                  ) : (
-                    <p className='lead quest-text'>No es probable que dure mas de 3 años</p>
-                  )
-                  
-                  }
-                  </section>
-                )}  
+                  {response !== null && (
+                    <section>
+                    <p className='lead quest-text'>Resultados de cada modelo:</p>
+                    <p className='lead quest-text'>Neural network: {response[0].toFixed(2)*100}%</p>
+                    <p className='lead quest-text'>Xgboost: {response[1].toFixed(2)*100}%</p>
+                    <hr></hr>
+                    <p className='lead quest-text'>Promedio:{(response[0]*100/2+response[1]*100/2).toFixed(1)}%</p>
+                    {Math.floor(response[0]*100/2+response[1]*100/2)>50 ? (
+                        <p className='lead quest-text'>Es probable que dure mas de 3 años</p>
+                    ) : Math.floor(response[0]*100/2+response[1]*100/2)===50 ? (
+                        <p className='lead quest-text'>No podemos saber si va a durar mas de 3 años</p>
+                    ) : (
+                      <p className='lead quest-text'>No es probable que dure mas de 3 años</p>
+                    )
+                    
+                    }
+                    </section>
+                  )}
+                </div>  
               </section>
             ) : (
               <p className='lead'>Rellena todos los campos</p>
