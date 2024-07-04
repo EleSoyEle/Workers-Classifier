@@ -135,7 +135,7 @@ function App() {
                   <p className='lead quest-text'>Neural network: {response[0].toFixed(2)*100}%</p>
                   <p className='lead quest-text'>Xgboost: {response[1].toFixed(2)*100}%</p>
                   <hr></hr>
-                  <p className='lead quest-text'>Promedio:{(response[0]/2+response[1]/2).toFixed(2)}</p>
+                  <p className='lead quest-text'>Promedio:{(response[0]*100/2+response[1]*100/2).toFixed(2)}%</p>
                   </section>
                 )}  
               </section>
