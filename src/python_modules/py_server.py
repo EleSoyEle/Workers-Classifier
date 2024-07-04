@@ -7,6 +7,7 @@ import tensorflow as tf
 import socketio
 from models import *
 import xgboost
+import pandas as pd
 
 # Crear una instancia de Flask y configurar CORS
 app = Flask(__name__)
@@ -18,7 +19,7 @@ app.wsgi_app = socketio.WSGIApp(sio, app.wsgi_app)
 
 # Cargar modelos de Machine Learning
 neural_n = make_model()
-xgb = load_xgb()
+xgb,feature_names = load_xgb()
 path_ckpt = "/home/angelo/test/src/python_modules/nn_checkpoints/"
 ckpt = tf.train.Checkpoint(model=neural_n)
 latest_ckpt = tf.train.latest_checkpoint(path_ckpt)
@@ -45,9 +46,10 @@ def connect(sid, environ):
 def message(sid, data):
     print(f"Message from {sid}: {data}")
     cdata = get_values(data)
-    nn_pred = np.array(neural_n(np.array(cdata)))[0] 
-    xgb_pred = xgb.predict(cdata)
-    preds = [float(nn_pred),int(xgb_pred)]
+    nn_pred = np.array(neural_n(np.array(cdata)))[0]
+    df = pd.DataFrame(cdata,columns=feature_names)
+    xgb_pred = xgb.predict_proba(df)[:,1]
+    preds = [float(nn_pred),float(xgb_pred)]
     print("Prediccion: {}".format(preds))
     sio.emit('response',preds, room=sid)
 

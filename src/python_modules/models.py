@@ -32,12 +32,15 @@ def load_models():
 
 
 def load_xgb():
-    path_check = "/home/angelo/test/src/python_modules/m_checkpoints/xgb.model"
-    #label_encoder = LabelEncoder()
-    #labels_encoded = label_encoder.fit_transform(nominal_columns_xg)
-    xgb = xgboost.XGBClassifier()
+    path_check = "/home/angelo/test/src/python_modules/m_checkpoints/xgb.json"
+    xgb = xgboost.XGBClassifier(n_estimators=1000, learning_rate=0.001)
     xgb.load_model(path_check)
-    return xgb
+    # Verificar los atributos del modelo
+    booster = xgb.get_booster()
+    print("Modelo cargado correctamente.")
+    print("Características del modelo:", booster.feature_names)
+    print("Parámetros del modelo:", booster.attributes())
+    return xgb,booster.feature_names
 
 def make_model():
     neural_n = Sequential()
