@@ -135,7 +135,16 @@ function App() {
                   <p className='lead quest-text'>Neural network: {response[0].toFixed(2)*100}%</p>
                   <p className='lead quest-text'>Xgboost: {response[1].toFixed(2)*100}%</p>
                   <hr></hr>
-                  <p className='lead quest-text'>Promedio:{(response[0]*100/2+response[1]*100/2).toFixed(2)}%</p>
+                  <p className='lead quest-text'>Promedio:{(response[0]*100/2+response[1]*100/2).toFixed(1)}%</p>
+                  {Math.floor(response[0]*100/2+response[1]*100/2)>50 ? (
+                      <p className='lead quest-text'>Es probable que dure mas de 3 años</p>
+                  ) : Math.floor(response[0]*100/2+response[1]*100/2)===50 ? (
+                      <p className='lead quest-text'>No podemos saber si va a durar mas de 3 años</p>
+                  ) : (
+                    <p className='lead quest-text'>No es probable que dure mas de 3 años</p>
+                  )
+                  
+                  }
                   </section>
                 )}  
               </section>
