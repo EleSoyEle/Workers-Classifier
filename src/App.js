@@ -137,11 +137,11 @@ function App() {
                     <hr></hr>
                     <p className='lead quest-text'>Promedio:{(response[0]*100/2+response[1]*100/2).toFixed(1)}%</p>
                     {Math.floor(response[0]*100/2+response[1]*100/2)>50 ? (
-                        <p className='lead quest-text'>Es probable que dure mas de 3 años</p>
+                        <p className='lead quest-text'><small>Es probable que dure mas de 3 años</small></p>
                     ) : Math.floor(response[0]*100/2+response[1]*100/2)===50 ? (
-                        <p className='lead quest-text'>No podemos saber si va a durar mas de 3 años</p>
+                        <p className='lead quest-text'><small>No podemos saber si va a durar mas de 3 años</small></p>
                     ) : (
-                      <p className='lead quest-text'>No es probable que dure mas de 3 años</p>
+                      <p className='lead quest-text'><small>No es probable que dure mas de 3 años</small></p>
                     )
                     
                     }
