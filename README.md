@@ -1,5 +1,7 @@
 # Proyecto integrador final
 En este proyecto se hace presentación de un programa que tiene como proposito evaluar si un trabajador va a durar mas de 3 años o no, mediante algoritmos de machine learning.
+
+
 ![image](/pimage1.png)
 
 
