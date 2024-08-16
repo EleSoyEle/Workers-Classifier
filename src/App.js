@@ -9,7 +9,7 @@ function make_header(){
     <section>
       <nav class="navbar navbar-dark bg-dark">
         <div class="container">
-          <a class="navbar-brand mb-0 h1 fst-italic" href="/">Denso</a>
+          <a class="navbar-brand mb-0 h1 fst-italic" href="/">Workev</a>
         </div>
     </nav>
     </section>
