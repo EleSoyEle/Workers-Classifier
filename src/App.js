@@ -7,8 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function make_header(){
   return (
     <section>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2610577512220822"
-     crossorigin="anonymous"></script>
       <nav class="navbar navbar-dark bg-dark">
         <div class="container">
           <a class="navbar-brand mb-0 h1 fst-italic" href="/">Denso</a>
